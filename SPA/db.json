@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "name": "Ivan",
+      "phone": "+11111111111",
+      "id": 1
+    },
+    {
+      "name": "Peter",
+      "phone": "+22222222222",
+      "id": 2
+    },
+    {
+      "name": "Elena",
+      "phone": "+33333333333",
+      "id": 3
+    },
+    {
+      "name": "Irina",
+      "phone": "+44444444444",
+      "id": 4
+    },
+    {
+      "name": "asdasd",
+      "phone": "324234234234",
+      "id": 5
+    },
+    {
+      "name": "kwork.ru",
+      "phone": "+7919809-33-56",
+      "id": 6
+    },
+    {
+      "name": "asdasd",
+      "phone": "34324234",
+      "id": 7
+    },
+    {
+      "name": "fgdfg",
+      "phone": "35345435",
+      "id": 8
+    }
+  ]
+}

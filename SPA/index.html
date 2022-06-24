@@ -9,75 +9,120 @@
   </head>
   <body class="page">
     <div class="content">
-      <table class="content__table" id="userTable">
+      <table class="content__table table" id="userTable">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Action</th>
+            <th class="table__th">Name</th>
+            <th class="table__th">Phone</th>
+            <th class="table__th">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <span>Ivan</span>
+          <tr class="table__tr-row">
+            <td class="table__td table__td-name" data-input="name">
+              <input readonly maxlength="50" type="text" value="Ivan" />
             </td>
-            <td>
-              <span>+1 111 111 11 11</span>
+            <td class="table__td table__td-phone" data-input="phone">
+              <input
+                readonly
+                maxlength="18"
+                inputmode="tel"
+                type="text"
+                value="+11111111111"
+              />
             </td>
-						<td>
-              <button>Edit</button>
-              <button>Delete</button>
-						</td>
+            <td class="table__td table__td-btn">
+              <button
+                class="table__btn table__btn_type_edit"
+                data-action="edit"
+              >
+                Edit
+              </button>
+              <button class="table__btn table__btn_type_delete">Delete</button>
+            </td>
           </tr>
-          <tr>
-            <td>
-              <span>Peter</span>
+          <tr class="table__tr-row">
+            <td class="table__td table__td-name" data-input="name">
+              <input readonly maxlength="50" type="text" value="Peter" />
             </td>
-            <td>
-              <span>+2 222 222 22 22</span>
+            <td class="table__td table__td-phone" data-input="phone">
+              <input
+                readonly
+                maxlength="18"
+                inputmode="tel"
+                type="text"
+                value="+22222222222"
+              />
             </td>
-						<td>
-              <button>Edit</button>
-              <button>Delete</button>
-						</td>
+            <td class="table__td table__td-btn">
+              <button
+                class="table__btn table__btn_type_edit"
+                data-action="edit"
+              >
+                Edit
+              </button>
+              <button class="table__btn table__btn_type_delete">Delete</button>
+            </td>
           </tr>
-          <tr>
-            <td>
-              <span>Elena</span>
+          <tr class="table__tr-row">
+            <td class="table__td table__td-name" data-input="name">
+              <input readonly maxlength="50" type="text" value="Elena" />
             </td>
-            <td>
-              <span>+3 333 333 33 33</span>
+            <td class="table__td table__td-phone" data-input="phone">
+              <input
+                readonly
+                maxlength="18"
+                inputmode="tel"
+                type="text"
+                value="+33333333333"
+              />
             </td>
-						<td>
-              <button>Edit</button>
-              <button>Delete</button>
-						</td>
+            <td class="table__td table__td-btn">
+              <button
+                class="table__btn table__btn_type_edit"
+                data-action="edit"
+              >
+                Edit
+              </button>
+              <button class="table__btn table__btn_type_delete">Delete</button>
+            </td>
           </tr>
-          <tr>
-            <td>
-              <span>Irina</span>
+          <tr class="table__tr-row">
+            <td class="table__td table__td-name" data-input="name">
+              <input readonly maxlength="50" type="text" value="Irina" />
             </td>
-            <td>
-              <span>+4 444 444 44 44</span>
+            <td class="table__td table__td-phone" data-input="phone">
+              <input
+                readonly
+                maxlengthlength="18"
+                inputmode="tel"
+                type="text"
+                value="+44444444444"
+              />
             </td>
-						<td>
-              <button>Edit</button>
-              <button>Delete</button>
-						</td>
+            <td class="table__td table__td-btn">
+              <button
+                class="table__btn table__btn_type_edit"
+                data-action="edit"
+              >
+                Edit
+              </button>
+              <button class="table__btn table__btn_type_delete">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>
 
-      <form class="form" id="userForm" name="userForm">
+      <form class="form" id="userForm" name="userForm" enctype="multipart/form-data">
         <div class="form__field filed-input">
-          <label class="filed-input__label" for="name">Name:</label>
+          <label class="filed-input__label" for="name">Nsssame:</label>
           <input
             class="filed-input__input"
             type="text"
             name="name"
             id="name"
-						placeholder="John Doe"
+            placeholder="John Doe"
+            maxlength="50"
             required
           />
           <span class="filed-input__message"></span>
@@ -89,9 +134,9 @@
             type="text"
             name="phone"
             id="phone"
-						inputmode="tel"
-						placeholder="Phone"
-						max="18"
+            inputmode="tel"
+            placeholder="Phone"
+            maxlength="18"
             required
           />
           <span class="filed-input__message"></span>

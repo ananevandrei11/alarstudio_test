@@ -1,0 +1,10 @@
+.flex-column {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.canvas {
+	margin: auto;
+	border: 1px solid;
+}

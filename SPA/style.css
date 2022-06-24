@@ -1,0 +1,46 @@
+.page {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+}
+
+.content {
+}
+
+.content__table {
+	margin-bottom: 40px;
+}
+
+.form {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 10px;
+}
+
+.form__field {
+	width: 100%;
+}
+
+.form__btn {
+	width: 25%;
+	justify-self: end;
+}
+
+.filed-input {
+	display: grid;
+	grid-template-columns: 25% 75%;
+	grid-template-rows: 1fr 1fr;
+	justify-content: space-between;
+}
+
+.filed-input__label {
+	width: 100%;
+}
+
+.filed-input__input {
+	width: 100%;
+}
+
+.filed-input__message {
+	grid-column: 2 / 3;
+}

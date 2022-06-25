@@ -2,6 +2,10 @@ class NewUser {
   constructor() {
     this.table = document.querySelector("#userTable");
     this.btnSubmit = document.querySelector("#userForm-btn");
+    this.url = "http://localhost:8000/";
+    this.totalUserId = [];
+    this.lastIdUser;
+    this.readyResponse;
   }
 
   checkEmptyValue(value) {
@@ -17,20 +21,10 @@ class NewUser {
     bool ? this.btnSubmit.removeAttribute("disabled") : this.btnSubmit.setAttribute("disabled", "");
   }
 
-  checkValidMap(validMap, btn) {
-    for (let valid of validMap.values()) {
-      if (!valid) {
-        this.disabledBtn(false);
-        return false;
-      } else {
-        this.disabledBtn(true);
-      }
-    }
-  }
-
-  addNewUserInTable(name, phone) {
+  addNewUserInTable(id = 0, name, phone) {
     let tr = document.createElement("TR");
     tr.setAttribute("class", "table__tr-row");
+    tr.setAttribute("data-id", id);
 
     let tdName = document.createElement("TD");
     tdName.setAttribute("class", "table__td table__td-name");
@@ -52,6 +46,80 @@ class NewUser {
     tr.append(tdBtn);
     this.table.querySelector("tbody").append(tr);
   }
+
+  setUserInTable(data) {
+    let _this = this;
+    data.forEach((elem, index) => {
+      _this.totalUserId.push(elem.id);
+      _this.addNewUserInTable(elem.id, elem.name, elem.phone);
+    });
+    this.lastIdUser = Math.max(...this.totalUserId);
+  }
+
+  async getUser() {
+    let _this = this;
+
+    let response = await fetch(`${this.url}users`, {
+      method: "GET",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        _this.setUserInTable(data);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  async postUser(id, name, phone) {
+    let _this = this;
+
+    let response = await fetch(`${this.url}users`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id,
+        name,
+        phone,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          _this.readyResponse = new Promise((resolve) => {
+            resolve(true);
+          });
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
+  async deleteUser(id) {
+    let response = await fetch(`${this.url}users/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  async upgradeUser(id, name, phone) {
+    let response = await fetch(`${this.url}users/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id,
+        name,
+        phone,
+      }),
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  }
 }
 
 class FormNewUser extends NewUser {
@@ -62,11 +130,23 @@ class FormNewUser extends NewUser {
   }
 
   setValidMap() {
+    let _this = this;
     [...this.form.elements].forEach((input, index) => {
       if (input.tagName === "INPUT") {
-        this.validForm.set(input.name, false);
+        _this.validForm.set(input.name, false);
       }
     });
+  }
+
+  checkValidMap(validMap, btn) {
+    for (let valid of validMap.values()) {
+      if (!valid) {
+        this.disabledBtn(false);
+        return false;
+      } else {
+        this.disabledBtn(true);
+      }
+    }
   }
 
   validateForm(input) {
@@ -90,16 +170,18 @@ class FormNewUser extends NewUser {
   }
 
   changeHandlers() {
+    let _this = this;
+
     [...this.form.elements].forEach((input, index) => {
       if (input.tagName === "INPUT") {
         input.onblur = () => {
-          this.validateForm(input);
+          _this.validateForm(input);
         };
 
         if (input.name === "phone") {
           input.oninput = (e) => {
             let value = e.target.value;
-            e.target.value = this.inputNumber(value);
+            e.target.value = _this.inputNumber(value);
           };
         }
       }
@@ -108,25 +190,18 @@ class FormNewUser extends NewUser {
 
   submitHandlers() {
     let _this = this;
-    this.btnSubmit.onclick = async () => {
-      _this.addNewUserInTable(_this.form.name.value, _this.form.phone.value);
 
-      let response = await fetch("http://localhost:3000/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: _this.form.name.value,
-          phone: _this.form.phone.value,
-        }),
-      })
-        .then((response) => {
-          if (response.ok) {
-            _this.form.reset();
-            _this.disabledBtn(false);
-            _this.setValidMap();
-          }
-        })
-        .catch((error) => console.log(error));
+    this.btnSubmit.onclick = async () => {
+      _this.addNewUserInTable(0, _this.form.name.value, _this.form.phone.value);
+      //_this.postUser(this.lastIdUser + 1, _this.form.name.value, _this.form.phone.value);
+      // _this.readyResponse.then((data) => {
+      //   _this.form.reset();
+      //   _this.disabledBtn(false);
+      //   _this.setValidMap();
+      // });
+      _this.form.reset();
+      _this.disabledBtn(false);
+      _this.setValidMap();
     };
   }
 
@@ -143,29 +218,6 @@ class UpgradeUser extends NewUser {
     this.stateBtnForm;
     this.validMap = new Map();
     this.error = true;
-  }
-
-  setUserInTable(data) {
-    let _this = this;
-
-    data.forEach((elem, index) => {
-      _this.addNewUserInTable(elem.name, elem.phone);
-    });
-  }
-
-  async getUser() {
-    let _this = this;
-
-    let response = await fetch("http://localhost:3000/users", {
-      method: "GET",
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        _this.setUserInTable(data);
-      })
-      .catch((error) => console.log(error));
   }
 
   upgradeTableBtns(action) {
@@ -240,57 +292,63 @@ class UpgradeUser extends NewUser {
 
     elem.setAttribute("data-action", "edit");
     elem.innerText = "Edit";
-    _this.upgradeTableBtns("save");
+    this.upgradeTableBtns("save");
 
     parent.querySelectorAll("td").forEach((td, index) => {
       if (!td.classList.contains("table__td-btn")) {
         td.querySelector("input").setAttribute("readonly", "");
-        td.querySelector("input").removeEventListener(
-          "blur",
-          _this.validateTable
-        );
+        td.querySelector("input").removeEventListener("blur", _this.validateTable);
       }
       if (td.classList.contains("table__td-phone")) {
-        td.querySelector("input").removeEventListener(
-          "input",
-          _this.phoneInput
-        );
+        td.querySelector("input").removeEventListener("input", _this.phoneInput);
       }
     });
   }
+
+
 
   changeElement() {
     let _this = this;
 
     this.table.onclick = (e) => {
+      e.preventDefault();
       let target = e.target;
       let parentBtnRow;
+      let userId;
+      let userName;
+      let userPhone;
 
       if (target.closest(".table__btn_type_edit")) {
         let dataAction = target.getAttribute("data-action");
         parentBtnRow = target.closest(".table__tr-row");
+        userId = parentBtnRow.getAttribute("data-id");
+        userName = parentBtnRow.querySelector('.table__td-name input').value;
+        userPhone = parentBtnRow.querySelector('.table__td-phone input').value;
 
         if (dataAction === "edit") {
           _this.setSaveMode(target, parentBtnRow);
-          if (this.btnSubmit.getAttribute("disabled") === null) {
-            this.stateBtnForm = "disabled";
-            this.disabledBtn(false);
+          if (_this.btnSubmit.getAttribute("disabled") === null) {
+            _this.stateBtnForm = "disabled";
+            _this.disabledBtn(false);
           }
         } else if (dataAction === "save" && _this.error === true) {
+          //_this.upgradeUser(userId, userName, userPhone);
           _this.setEditMode(target, parentBtnRow);
-          if (this.stateBtnForm === "disabled") {
-            this.disabledBtn(true);
+          if (_this.stateBtnForm === "disabled") {
+            _this.disabledBtn(true);
           }
         }
       } else if (target.closest(".table__btn_type_delete")) {
         parentBtnRow = target.closest(".table__tr-row");
+        //userId = parentBtnRow.getAttribute("data-id");
+        //_this.deleteUser(userId);
         parentBtnRow.remove();
       }
     };
   }
 
   init() {
-    this.getUser();
+    //this.getUser();
     this.changeElement();
   }
 }

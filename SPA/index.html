@@ -9,113 +9,128 @@
   </head>
   <body class="page">
     <div class="content">
-      <table class="content__table table" id="userTable">
-        <thead>
-          <tr>
-            <th class="table__th">Name</th>
-            <th class="table__th">Phone</th>
-            <th class="table__th">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="table__tr-row">
-            <td class="table__td table__td-name" data-input="name">
-              <input readonly maxlength="50" type="text" value="Ivan" />
-            </td>
-            <td class="table__td table__td-phone" data-input="phone">
-              <input
-                readonly
-                maxlength="18"
-                inputmode="tel"
-                type="text"
-                value="+11111111111"
-              />
-            </td>
-            <td class="table__td table__td-btn">
-              <button
-                class="table__btn table__btn_type_edit"
-                data-action="edit"
-              >
-                Edit
-              </button>
-              <button class="table__btn table__btn_type_delete">Delete</button>
-            </td>
-          </tr>
-          <tr class="table__tr-row">
-            <td class="table__td table__td-name" data-input="name">
-              <input readonly maxlength="50" type="text" value="Peter" />
-            </td>
-            <td class="table__td table__td-phone" data-input="phone">
-              <input
-                readonly
-                maxlength="18"
-                inputmode="tel"
-                type="text"
-                value="+22222222222"
-              />
-            </td>
-            <td class="table__td table__td-btn">
-              <button
-                class="table__btn table__btn_type_edit"
-                data-action="edit"
-              >
-                Edit
-              </button>
-              <button class="table__btn table__btn_type_delete">Delete</button>
-            </td>
-          </tr>
-          <tr class="table__tr-row">
-            <td class="table__td table__td-name" data-input="name">
-              <input readonly maxlength="50" type="text" value="Elena" />
-            </td>
-            <td class="table__td table__td-phone" data-input="phone">
-              <input
-                readonly
-                maxlength="18"
-                inputmode="tel"
-                type="text"
-                value="+33333333333"
-              />
-            </td>
-            <td class="table__td table__td-btn">
-              <button
-                class="table__btn table__btn_type_edit"
-                data-action="edit"
-              >
-                Edit
-              </button>
-              <button class="table__btn table__btn_type_delete">Delete</button>
-            </td>
-          </tr>
-          <tr class="table__tr-row">
-            <td class="table__td table__td-name" data-input="name">
-              <input readonly maxlength="50" type="text" value="Irina" />
-            </td>
-            <td class="table__td table__td-phone" data-input="phone">
-              <input
-                readonly
-                maxlengthlength="18"
-                inputmode="tel"
-                type="text"
-                value="+44444444444"
-              />
-            </td>
-            <td class="table__td table__td-btn">
-              <button
-                class="table__btn table__btn_type_edit"
-                data-action="edit"
-              >
-                Edit
-              </button>
-              <button class="table__btn table__btn_type_delete">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="content__wrapper-table">
+        <table class="content__table table" id="userTable">
+          <thead>
+            <tr>
+              <th class="table__th">Name</th>
+              <th class="table__th">Phone</th>
+              <th class="table__th">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table__tr-row" data-id="1">
+              <td class="table__td table__td-name" data-input="name">
+                <input readonly maxlength="50" type="text" value="Ivan" />
+              </td>
+              <td class="table__td table__td-phone" data-input="phone">
+                <input
+                  readonly
+                  maxlength="18"
+                  inputmode="tel"
+                  type="text"
+                  value="+11111111111"
+                />
+              </td>
+              <td class="table__td table__td-btn">
+                <button
+                  class="table__btn table__btn_type_edit"
+                  data-action="edit"
+                >
+                  Edit
+                </button>
+                <button class="table__btn table__btn_type_delete">
+                  Delete
+                </button>
+              </td>
+            </tr>
+            <tr class="table__tr-row" data-id="2">
+              <td class="table__td table__td-name" data-input="name">
+                <input readonly maxlength="50" type="text" value="Peter" />
+              </td>
+              <td class="table__td table__td-phone" data-input="phone">
+                <input
+                  readonly
+                  maxlength="18"
+                  inputmode="tel"
+                  type="text"
+                  value="+22222222222"
+                />
+              </td>
+              <td class="table__td table__td-btn">
+                <button
+                  class="table__btn table__btn_type_edit"
+                  data-action="edit"
+                >
+                  Edit
+                </button>
+                <button class="table__btn table__btn_type_delete">
+                  Delete
+                </button>
+              </td>
+            </tr>
+            <tr class="table__tr-row" data-id="3">
+              <td class="table__td table__td-name" data-input="name">
+                <input readonly maxlength="50" type="text" value="Elena" />
+              </td>
+              <td class="table__td table__td-phone" data-input="phone">
+                <input
+                  readonly
+                  maxlength="18"
+                  inputmode="tel"
+                  type="text"
+                  value="+33333333333"
+                />
+              </td>
+              <td class="table__td table__td-btn">
+                <button
+                  class="table__btn table__btn_type_edit"
+                  data-action="edit"
+                >
+                  Edit
+                </button>
+                <button class="table__btn table__btn_type_delete">
+                  Delete
+                </button>
+              </td>
+            </tr>
+            <tr class="table__tr-row" data-id="4">
+              <td class="table__td table__td-name" data-input="name">
+                <input readonly maxlength="50" type="text" value="Irina" />
+              </td>
+              <td class="table__td table__td-phone" data-input="phone">
+                <input
+                  readonly
+                  maxlengthlength="18"
+                  inputmode="tel"
+                  type="text"
+                  value="+44444444444"
+                />
+              </td>
+              <td class="table__td table__td-btn">
+                <button
+                  class="table__btn table__btn_type_edit"
+                  data-action="edit"
+                >
+                  Edit
+                </button>
+                <button class="table__btn table__btn_type_delete">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-      <form class="form" id="userForm" name="userForm" enctype="multipart/form-data">
+      <form
+        class="form"
+        id="userForm"
+        name="userForm"
+        enctype="multipart/form-data"
+      >
         <div class="form__field filed-input">
-          <label class="filed-input__label" for="name">Nsssame:</label>
+          <label class="filed-input__label" for="name">Name:</label>
           <input
             class="filed-input__input"
             type="text"
@@ -147,6 +162,7 @@
       </form>
     </div>
 
-    <script src="script.js"></script>
+    <script src="scriptNotServer.js"></script>
+    <!-- <script src="scriptServer.js"></script> -->
   </body>
 </html>
